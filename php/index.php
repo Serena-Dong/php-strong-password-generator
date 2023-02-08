@@ -1,4 +1,7 @@
 <?php
+session_start();
+// Recupero il dato
+$password_lenght = $_GET['password'] ?? '';
 
 ?>
 <!DOCTYPE html>
