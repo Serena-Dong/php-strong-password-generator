@@ -2,6 +2,28 @@
 session_start();
 // Recupero il dato
 $password_lenght = $_GET['password'] ?? '';
+// Creo funzione per generare la password
+function passwordGenerator($password_lenght){
+    $pass = [];
+
+    $letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+    $letters_upperCase = array_map('strtoupper', $letters);
+    $numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    $symbols = ['!', '"', '£', '$', '%', '&', '/', '(', ')', '=', '?', '^', '*', '[', ']'];
+
+
+    // Merge
+    $tot = array_merge($letters, $letters_upperCase, $numbers, $symbols);
+    // Counting
+    $tot_lenght = count($tot);
+
+    for($i = 0; $i < $password_lenght ; $i++){
+        $n = rand(0, $tot_lenght);
+        $password = $tot($n);
+    }
+    return implode($pass);
+
+}
 
 ?>
 <!DOCTYPE html>
