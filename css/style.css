@@ -12,11 +12,24 @@ body {
 }
 
 .container {
-    max-width: 1200px;
+    width: 1200px;
 }
 
 /* UTILITIES */
 
 h1 {
     margin: 2rem;
+}
+
+.form-container {
+    width: 500px;
+    padding: 1rem;
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+
+}
+
+.password-form {
+    height: 100px;
 }
