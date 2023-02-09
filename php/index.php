@@ -13,10 +13,10 @@ function password_generator($lenght){
     // Merge
     $characters = $letters .  strtoupper($letters) .  $numbers .  $symbols;
     // Counting
-    $characters_lenght = mb_srtlen($characters);
+    $characters_lenght = mb_strlen($characters);
 
     // Until it reaches the user's password lenght
-    while(mb_strlen($password) < $lenght){
+    while (mb_strlen($password) < $lenght){
         // Random Index
         $random_index = rand( 0, $characters_lenght - 1 );
         // Picking a character w/ a random index 
@@ -30,7 +30,7 @@ function password_generator($lenght){
 
 }
 
-if(isset($_GET['lenght'])){
+if (isset($_GET['lenght'])){
     $result = password_generator($_GET['lenght']);
 }
 
@@ -58,19 +58,20 @@ if(isset($_GET['lenght'])){
        </div>
     </header>
     <main>
-        <div class="container d-flex justify-content-center">
+        <div class="container d-flex justify-content-center align-items-center flex-column">
 
-        <!-- Alert -->
-        <?php if(isset($result)) : ?>
-        <div class="alert alert-info">
+            <!-- Alert -->
+            <?php if(isset($result)) : ?>
+            <div class="alert alert-info col-7">
             <?= $result ?>
-        </div>
-        <?php endif ?>
+            </div>
+            <?php endif ?>
 
-            <div class="form-container">
+            <!-- Form -->
+            <div class="form-container col-1">
                 <form action="" method="GET">
                     <!-- Input -->
-                    <div class="password-form mb-3 d-flex justify-content-center align-items-center ">
+                    <div class="password-form  mb-3 d-flex justify-content-center align-items-center ">
                         
                         <div class="div">
                             <p class="mx-4">Lunghezza Password: </p>
