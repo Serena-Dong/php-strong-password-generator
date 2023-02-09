@@ -1,5 +1,6 @@
 <?php
 session_start();
+$pass = $_SESSION['password'];
 if(empty($_SESSION['password'])){
     header('Location: index.php');
 }
@@ -24,7 +25,7 @@ if(empty($_SESSION['password'])){
         <div class="row justify-content-center">
             <div class="col-7">
                 <div class="alert alert-info">
-                    La password generata è: <strong> <?= $password ?> </strong>
+                    La password generata è: <strong> <?= $pass ?> </strong>
                 </div>
             </div>
         </div>
