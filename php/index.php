@@ -1,29 +1,39 @@
 <?php
-session_start();
-// Recupero il dato
-$password_lenght = $_GET['password'] ?? '';
 // Creo funzione per generare la password
-function passwordGenerator($password_lenght){
-    $pass = [];
+function password_generator($lenght){
 
-    $letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-    $letters_upperCase = array_map('strtoupper', $letters);
-    $numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-    $symbols = ['!', '"', '£', '$', '%', '&', '/', '(', ')', '=', '?', '^', '*', '[', ']'];
+    // Password Deposit
+    $password = '';
 
+    // Characters
+    $letters = 'abcdefghijklmnopqrstuvwxyz';
+    $numbers = '0123456789';
+    $symbols = '!"£$%&/()=+,.-*§?^';
 
     // Merge
-    $tot = array_merge($letters, $letters_upperCase, $numbers, $symbols);
+    $characters = $letters .  strtoupper($letters) .  $numbers .  $symbols;
     // Counting
-    $tot_lenght = count($tot);
+    $characters_lenght = mb_srtlen($characters);
 
-    for($i = 0; $i < $password_lenght ; $i++){
-        $n = rand(0, $tot_lenght);
-        $password = $tot($n);
+    // Until it reaches the user's password lenght
+    while(mb_strlen($password) < $lenght){
+        // Random Index
+        $random_index = rand( 0, $characters_lenght - 1 );
+        // Picking a character w/ a random index 
+        $random_character= $characters[$random_index];
+
+        // Passing the data to the deposit
+        $password .= $random_character;
     }
-    return implode($pass);
+
+    return $password;
 
 }
+
+if(isset($_GET['lenght'])){
+    $result = password_generator($_GET['lenght']);
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -50,6 +60,13 @@ function passwordGenerator($password_lenght){
     <main>
         <div class="container d-flex justify-content-center">
 
+        <!-- Alert -->
+        <?php if(isset($result)) : ?>
+        <div class="alert alert-info">
+            <?= $result ?>
+        </div>
+        <?php endif ?>
+
             <div class="form-container">
                 <form action="" method="GET">
                     <!-- Input -->
@@ -59,7 +76,7 @@ function passwordGenerator($password_lenght){
                             <p class="mx-4">Lunghezza Password: </p>
                         </div>
                         <div class="input-container">
-                            <input type="number" class="form-control" name="password">
+                            <input type="number" class="form-control" name="lenght" id="lenght">
                         </div>
                         
                     </div>
