@@ -1,37 +1,12 @@
 <?php
-// Creo funzione per generare la password
-function password_generator($lenght){
+// Function 
+include './partials/function.php';
 
-    // Password Deposit
-    $password = '';
-
-    // Characters
-    $letters = 'abcdefghijklmnopqrstuvwxyz';
-    $numbers = '0123456789';
-    $symbols = '!"£$%&/()=+,.-*§?^';
-
-    // Merge
-    $characters = $letters .  strtoupper($letters) .  $numbers .  $symbols;
-    // Counting
-    $characters_lenght = mb_strlen($characters);
-
-    // Until it reaches the user's password lenght
-    while (mb_strlen($password) < $lenght){
-        // Random Index
-        $random_index = rand( 0, $characters_lenght - 1 );
-        // Picking a character w/ a random index 
-        $random_character= $characters[$random_index];
-
-        // Passing the data to the deposit
-        $password .= $random_character;
-    }
-
-    return $password;
-
-}
-
+// 
 if (isset($_GET['lenght'])){
     $result = password_generator($_GET['lenght']);
+
+    if ($result === true ) header('Location: ./partials/success.php');
 }
 
 
@@ -61,9 +36,9 @@ if (isset($_GET['lenght'])){
         <div class="container d-flex justify-content-center align-items-center flex-column">
 
             <!-- Alert -->
-            <?php if(isset($result)) : ?>
+            <?php if($result === false) : ?>
             <div class="alert alert-info col-7">
-            <?= $result ?>
+                <p>Inserisci un valore valido</p>
             </div>
             <?php endif ?>
 
