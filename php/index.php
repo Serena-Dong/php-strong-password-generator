@@ -1,12 +1,13 @@
 <?php
+
 // Function 
-include './partials/function.php';
+include 'function.php';
 
 // 
 if (isset($_GET['lenght'])){
     $result = password_generator($_GET['lenght']);
 
-    if ($result === true ) header('Location: ./partials/success.php');
+    if ($result === true ) header('Location: success.php');
 }
 
 
